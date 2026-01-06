@@ -34,12 +34,11 @@ architecture behav of carrySelect is
 
     -- intermediate signal declaration
     signal C : std_logic_vector(7 downto 0);
-    -- signal C0, C1, C2, C3, C4, C5, C6, C7: std_logic;
-    signal S0, S1, S2, S3 : std_logic;
+
     signal A0, A1, A2, A3, B0, B1, B2, B3 : std_logic;
 
-    variable zero : std_logic := '0';
-	variable one  : std_logic := '1';
+    signal zero : std_logic := '0';
+	signal one  : std_logic := '1';
 begin
     -- C_in = 0
     x1_zero: fullAdder port map (
@@ -63,7 +62,7 @@ begin
         A => A0,
         B => B0,
         S => C_IN,
-        mux_out => S0
+        mux_out => SOMA_OUT(0)
     );
 
     -- C_in = 0
@@ -88,7 +87,7 @@ begin
         A => A1,
         B => B1,
         S => C_IN,
-        mux_out => S1
+        mux_out => SOMA_OUT(1)
     );
 
     -- C_in = 0
@@ -113,7 +112,7 @@ begin
         A => A2,
         B => B2,
         S => C_IN,
-        mux_out => S2
+        mux_out => SOMA_OUT(2)
     );
 
     -- C_in = 0
@@ -138,7 +137,7 @@ begin
         A => A3,
         B => B3,
         S => C_IN,
-        mux_out => S3
+        mux_out => SOMA_OUT(3)
     );
 
     mux_Cout: mux port map (
