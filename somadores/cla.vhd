@@ -33,8 +33,7 @@ architecture behav of CLA is
     end component;
 
     -- intermediate signal declaration
-    signal C0, C1, C2: std_logic;
-    signal S0, S1, S2, S3 : std_logic;
+    signal C0, C1, C2: std_logic;   
 
     signal Cg1, Cg2, Cg3, Cg4, Cp1, Cp2, Cp3, Cp4 : std_logic;
 
@@ -54,7 +53,7 @@ begin
         B => B_IN(0),
         C_in => C_IN,
         C_out => Cout_unused(0),
-        Sum => S0
+        Sum => SOMA_OUT(0)
     );
 
     C0 <= Cg1 or (Cp1 and C_IN); 
@@ -71,7 +70,7 @@ begin
         B => B_IN(1),
         C_in => C0,
         C_out => Cout_unused(1),
-        Sum => S1
+        Sum => SOMA_OUT(1)
     );
 
     C1 <= Cg2 OR (Cp2 and Cg1) or (Cp2 and Cp1 and C_IN);
@@ -88,7 +87,7 @@ begin
         B => B_IN(2),
         C_in => C1,
         C_out => Cout_unused(2),
-        Sum => S2
+        Sum => SOMA_OUT(2)
     );
 
     C2 <= Cg3 or (Cp3 and Cg2) or (Cp3 and Cp2 and Cg1) or (Cp3 and Cp2 and Cp1 and C_IN);
@@ -105,7 +104,7 @@ begin
         B => B_IN(3),
         C_in => C2,
         C_out => Cout_unused(3),
-        Sum => S3
+        Sum => SOMA_OUT(3)
     );
 
     C_OUT <= Cg4 or (Cp4 and Cg3) or (Cp4 and Cp3 and Cg2) or (Cp4 and Cp3 and Cp2 and Cg1) or (Cp4 and Cp3 and Cp2 and Cp1 and C_IN);
