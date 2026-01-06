@@ -26,14 +26,14 @@ architecture behav of RCA is
 
     -- intermediate signal declaration
     signal C0, C1, C2: std_logic;
-    signal S0, S1, S2, S3 : std_logic;
+
 begin
     x1: fullAdder port map (
         A => A_IN(0),
         B => B_IN(0),
         C_in => C_IN,
         C_out => C0,
-        Sum => S0
+        Sum => SOMA_OUT(0)
     );
 
     x2: fullAdder port map (
@@ -41,7 +41,7 @@ begin
         B => B_IN(1),
         C_in => C0,
         C_out => C1,
-        Sum => S1
+        Sum => SOMA_OUT(1)
     );
 
     x3: fullAdder port map (
@@ -49,7 +49,7 @@ begin
         B => B_IN(2),
         C_in => C1,
         C_out => C2,
-        Sum => S2
+        Sum => SOMA_OUT(2)
     );
 
     x4: fullAdder port map (
@@ -57,7 +57,7 @@ begin
         B => B_IN(3),
         C_in => C2,
         C_out => C_OUT,
-        Sum => S3
+        Sum => SOMA_OUT(3)
     );
     
 end behav;
