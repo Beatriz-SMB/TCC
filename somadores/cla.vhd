@@ -6,11 +6,11 @@ use IEEE.NUMERIC_STD.ALL;
 -- entity
 entity CLA is
     Port ( 
-        A_IN : in std_logic_vector(3 downto 0);
-        B_IN : in std_logic_vector(3 downto 0);
-        C_IN : in std_logic_vector(0 downto 0);
-        SOMA_OUT : out std_logic_vector(3 downto 0);
-        C_OUT : out std_logic_vector(0 downto 0)
+        A_IN        : in std_logic_vector(3 downto 0);
+        B_IN        : in std_logic_vector(3 downto 0);
+        C_IN        : in std_logic_vector(0 downto 0);
+        SOMA_OUT    : out std_logic_vector(3 downto 0);
+        C_OUT       : out std_logic_vector(0 downto 0)
     );
 end CLA;
 
