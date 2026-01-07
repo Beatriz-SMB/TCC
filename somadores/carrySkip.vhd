@@ -8,9 +8,9 @@ entity carrySkip is
     Port ( 
         A_IN : in std_logic_vector(3 downto 0);
         B_IN : in std_logic_vector(3 downto 0);
-        C_IN : in std_logic;
+        C_IN : in std_logic_vector(0 downto 0);
         SOMA_OUT : out std_logic_vector(3 downto 0);
-        C_OUT : out std_logic
+        C_OUT : out std_logic_vector(0 downto 0)
     );
 end carrySkip;
 
@@ -43,7 +43,7 @@ begin
     x1: fullAdder port map (
         A => A_IN(0),
         B => B_IN(0),
-        C_in => C_IN,
+        C_in => C_IN(0),
         C_out => C(0),
         Sum => SOMA_OUT(0)
     );
@@ -84,9 +84,9 @@ begin
 
     m: mux port map (
         A => C(3),
-        B => C_IN,
+        B => C_IN(0),
         S => P,
-        mux_out => C_OUT
+        mux_out => C_OUT(0)
     );
     
 end behav;
