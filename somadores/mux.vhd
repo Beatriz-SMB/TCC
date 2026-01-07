@@ -5,9 +5,11 @@ use IEEE.NUMERIC_STD.ALL;
 
 -- entity
 entity mux is
+    generic ( n: positive := 1);
     port(
-			A, B, S     : in std_logic;
-            mux_out     : out std_logic
+            A, B    : in std_logic_vector(n-1 downto 0);
+            S       : in std_logic;    
+            mux_out : out std_logic_vector(n-1 downto 0)
     );
 end mux;
 
