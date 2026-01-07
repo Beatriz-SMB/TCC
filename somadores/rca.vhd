@@ -8,9 +8,9 @@ entity RCA is
     Port ( 
         A_IN : in std_logic_vector(3 downto 0);
         B_IN : in std_logic_vector(3 downto 0);
-        C_IN : in std_logic;
+        C_IN : in std_logic_vector(0 downto 0);
         SOMA_OUT : out std_logic_vector(3 downto 0);
-        C_OUT : out std_logic
+        C_OUT : out std_logic_vector(0 downto 0)
     );
 end RCA;
 
@@ -31,7 +31,7 @@ begin
     x1: fullAdder port map (
         A => A_IN(0),
         B => B_IN(0),
-        C_in => C_IN,
+        C_in => C_IN(0),
         C_out => C0,
         Sum => SOMA_OUT(0)
     );
@@ -56,7 +56,7 @@ begin
         A => A_IN(3),
         B => B_IN(3),
         C_in => C2,
-        C_out => C_OUT,
+        C_out => C_OUT(0),
         Sum => SOMA_OUT(3)
     );
     
