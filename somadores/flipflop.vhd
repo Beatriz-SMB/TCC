@@ -5,10 +5,11 @@ use IEEE.NUMERIC_STD.ALL;
 
 -- entity
 entity flipflopD is
+	generic ( n: positive);
     port(
-			D   : in std_logic;
-			clk : in std_logic;
-			Q   : out std_logic
+			D   : in std_logic_vector(n-1 downto 0);
+			CLK, RESET : in std_logic;
+			Q   : out std_logic_vector(n-1 downto 0)
     );
 end flipflopD;
 
@@ -17,9 +18,11 @@ architecture behav of flipflopD is
 
 begin
 
-	process(clk)
+	process(CLK)
 	begin
-		if rising_edge(clk) then
+		if RESET = '1' then
+			Q <= (others => '0');
+		elsif rising_edge(CLK) then
 			Q <= D;
 		end if;
 	end process;
