@@ -8,9 +8,9 @@ entity carrySelect is
     Port ( 
         A_IN : in std_logic_vector(3 downto 0);
         B_IN : in std_logic_vector(3 downto 0);
-        C_IN : in std_logic;
+        C_IN : in std_logic_vector(0 downto 0);
         SOMA_OUT : out std_logic_vector(3 downto 0);
-        C_OUT : out std_logic
+        C_OUT : out std_logic_vector(0 downto 0)
     );
 end carrySelect;
 
@@ -61,7 +61,7 @@ begin
     m1: mux port map (
         A => A0,
         B => B0,
-        S => C_IN,
+        S => C_IN(0),
         mux_out => SOMA_OUT(0)
     );
 
@@ -86,7 +86,7 @@ begin
     m2: mux port map (
         A => A1,
         B => B1,
-        S => C_IN,
+        S => C_IN(0),
         mux_out => SOMA_OUT(1)
     );
 
@@ -111,7 +111,7 @@ begin
     m3: mux port map (
         A => A2,
         B => B2,
-        S => C_IN,
+        S => C_IN(0),
         mux_out => SOMA_OUT(2)
     );
 
@@ -136,15 +136,15 @@ begin
     m4: mux port map (
         A => A3,
         B => B3,
-        S => C_IN,
+        S => C_IN(0),
         mux_out => SOMA_OUT(3)
     );
 
     mux_Cout: mux port map (
         A => C(6),
         B => C(7),
-        S => C_IN,
-        mux_out => C_OUT
+        S => C_IN(0),
+        mux_out => C_OUT(0)
     );
     
 end behav;
