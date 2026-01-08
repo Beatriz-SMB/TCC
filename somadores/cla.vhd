@@ -6,11 +6,11 @@ use IEEE.NUMERIC_STD.ALL;
 -- entity
 entity CLA is
     Port ( 
-        A_IN        : in std_logic_vector(3 downto 0);
-        B_IN        : in std_logic_vector(3 downto 0);
-        C_IN        : in std_logic_vector(0 downto 0);
-        SOMA_OUT    : out std_logic_vector(3 downto 0);
-        C_OUT       : out std_logic_vector(0 downto 0)
+        A_IN : in std_logic_vector(3 downto 0);
+        B_IN : in std_logic_vector(3 downto 0);
+        C_IN : in std_logic;
+        SOMA_OUT : out std_logic_vector(3 downto 0);
+        C_OUT : out std_logic
     );
 end CLA;
 
@@ -49,12 +49,12 @@ begin
     x1: fullAdder port map (
         A => A_IN(0),
         B => B_IN(0),
-        C_in => C_IN(0),
+        C_in => C_IN,
         C_out => open,
         Sum => SOMA_OUT(0)
     );
 
-    C0 <= Cg1 or (Cp1 and C_IN(0)); 
+    C0 <= Cg1 or (Cp1 and C_IN); 
 
     y2: halfAdder port map (
         A => A_IN(1),
@@ -71,7 +71,7 @@ begin
         Sum => SOMA_OUT(1)
     );
 
-    C1 <= Cg2 OR (Cp2 and Cg1) or (Cp2 and Cp1 and C_IN(0));
+    C1 <= Cg2 OR (Cp2 and Cg1) or (Cp2 and Cp1 and C_IN);
 
     y3: halfAdder port map (
         A => A_IN(2),
@@ -88,7 +88,7 @@ begin
         Sum => SOMA_OUT(2)
     );
 
-    C2 <= Cg3 or (Cp3 and Cg2) or (Cp3 and Cp2 and Cg1) or (Cp3 and Cp2 and Cp1 and C_IN(0));
+    C2 <= Cg3 or (Cp3 and Cg2) or (Cp3 and Cp2 and Cg1) or (Cp3 and Cp2 and Cp1 and C_IN);
 
     y4: halfAdder port map (
         A => A_IN(3),
@@ -105,6 +105,6 @@ begin
         Sum => SOMA_OUT(3)
     );
 
-    C_OUT(0) <= Cg4 or (Cp4 and Cg3) or (Cp4 and Cp3 and Cg2) or (Cp4 and Cp3 and Cp2 and Cg1) or (Cp4 and Cp3 and Cp2 and Cp1 and C_IN(0));
+    C_OUT <= Cg4 or (Cp4 and Cg3) or (Cp4 and Cp3 and Cg2) or (Cp4 and Cp3 and Cp2 and Cg1) or (Cp4 and Cp3 and Cp2 and Cp1 and C_IN);
     
 end behav;
