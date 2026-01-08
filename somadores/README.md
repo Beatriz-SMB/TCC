@@ -20,6 +20,17 @@ TCC/
 ### 1. Abrir o ModelSim
 Abra o ModelSim e acesse o **Transcript** (terminal interno).
 
+### 2. Verificar a biblioteca `work`
+
+Antes de qualquer coisa, é necessário garantir que a biblioteca `work` exista.
+
+No terminal do ModelSim, execute:
+
+```tcl
+vlib work
+vmap work work
+```
+
 ### 2. Navegar até a pasta do projeto
 No Transcript, vá até o diretório onde está o projeto:
 
