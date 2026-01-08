@@ -31,7 +31,7 @@ vlib work
 vmap work work
 ```
 
-### 2. Navegar até a pasta do projeto
+### 3. Navegar até a pasta do projeto
 No Transcript, vá até o diretório onde está o projeto:
 
 ```tcl
@@ -40,21 +40,21 @@ cd "C:/Users/Beatriz/Desktop/TCC"
 
 > Ajuste o caminho caso seu projeto esteja em outro local.
 
-### 3. Compilar os arquivos VHDL do projeto
+### 4. Compilar os arquivos VHDL do projeto
 Compile todos os arquivos `.vhd` da pasta principal do projeto:
 
 ```tcl
 vcom somadores/*.vhd
 ```
 
-### 4. Compilar o testbench
+### 5. Compilar o testbench
 Agora compile o arquivo de teste:
 
 ```tcl
 vcom testbench/tb_teste.vhd
 ```
 
-### 5. Iniciar a simulação
+### 6. Iniciar a simulação
 Inicie a simulação chamando a entidade do testbench:
 
 ```tcl
@@ -63,14 +63,14 @@ vsim -c work.tb_golden
 
 > Certifique-se de que o nome da entidade do testbench está correto.
 
-### 6. Rodar a simulação
+### 7. Rodar a simulação
 Execute a simulação até o final:
 
 ```tcl
 run -all
 ```
 
-### 7. Finalizar a simulação
+### 8. Finalizar a simulação
 Após o término da simulação, finalize com:
 
 ```tcl
