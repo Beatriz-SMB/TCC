@@ -11,7 +11,7 @@ Este documento descreve o passo a passo para compilar e executar os testbenches 
 TCC/
 ├── somadores/
 │   └── *.vhd
-└── tb/
+└── testbench/
     └── tb_teste.vhd
 ```
 
@@ -40,7 +40,7 @@ vcom somadores/*.vhd
 Agora compile o arquivo de teste:
 
 ```tcl
-vcom tb/tb_teste.vhd
+vcom testbench/tb_teste.vhd
 ```
 
 ### 5. Iniciar a simulação
