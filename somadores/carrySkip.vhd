@@ -6,11 +6,11 @@ use IEEE.NUMERIC_STD.ALL;
 -- entity
 entity carrySkip is
     Port ( 
-        A_IN        : in std_logic_vector(3 downto 0);
-        B_IN        : in std_logic_vector(3 downto 0);
-        C_IN        : in std_logic_vector(0 downto 0);
-        SOMA_OUT    : out std_logic_vector(3 downto 0);
-        C_OUT       : out std_logic_vector(0 downto 0)
+        A_IN : in std_logic_vector(3 downto 0);
+        B_IN : in std_logic_vector(3 downto 0);
+        C_IN : in std_logic;
+        SOMA_OUT : out std_logic_vector(3 downto 0);
+        C_OUT : out std_logic
     );
 end carrySkip;
 
@@ -26,11 +26,10 @@ architecture behav of carrySkip is
 
     -- Mux --------------------------
     component mux is
-        generic ( n: positive := 1);
         port ( 
-            A, B : in std_logic_vector(n-1 downto 0);
+            A, B : in std_logic;
             S : in std_logic;
-            mux_out : out std_logic_vector(n-1 downto 0)
+            MUX_OUT : out std_logic
         );
     end component;
 
@@ -44,7 +43,7 @@ begin
     x1: fullAdder port map (
         A => A_IN(0),
         B => B_IN(0),
-        C_in => C_IN(0),
+        C_in => C_IN,
         C_out => C(0),
         Sum => SOMA_OUT(0)
     );
@@ -83,11 +82,11 @@ begin
 
     P <= P0 and P1 and P2 and P3;
 
-    m: mux generic map(1) port map (
-        A => C(3 downto 3),
+    m: mux port map (
+        A => C(3),
         B => C_IN,
         S => P,
-        mux_out => C_OUT
+        MUX_OUT => C_OUT
     );
     
 end behav;
