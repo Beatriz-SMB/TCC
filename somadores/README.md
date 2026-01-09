@@ -28,11 +28,21 @@ No terminal do ModelSim, execute:
 
 ```tcl
 vlib work
+```
+Esse comando cria a pasta física `work/` no diretório atual.
+
+### 3. Mapear a biblioteca `work`
+
+Depois de criada, é necessário associar o nome lógico `work` à pasta física.
+
+```tcl
 vmap work work
 ```
 
-### 3. Navegar até a pasta do projeto
-No Transcript, vá até o diretório onde está o projeto:
+Sem esse mapeamento, o ModelSim não consegue encontrar os arquivos compilados.
+
+### 4. Navegar até a pasta do projeto
+Com a pasta `work` criada, no Transcript, vá até o diretório onde está o projeto:
 
 ```tcl
 cd "C:/Users/Beatriz/Desktop/TCC"
@@ -40,21 +50,21 @@ cd "C:/Users/Beatriz/Desktop/TCC"
 
 > Ajuste o caminho caso seu projeto esteja em outro local.
 
-### 4. Compilar os arquivos VHDL do projeto
+### 5. Compilar os arquivos VHDL do projeto
 Compile todos os arquivos `.vhd` da pasta principal do projeto:
 
 ```tcl
 vcom somadores/*.vhd
 ```
 
-### 5. Compilar o testbench
+### 6. Compilar o testbench
 Agora compile o arquivo de teste:
 
 ```tcl
 vcom testbench/tb_teste.vhd
 ```
 
-### 6. Iniciar a simulação
+### 7. Iniciar a simulação
 Inicie a simulação chamando a entidade do testbench:
 
 ```tcl
@@ -63,14 +73,14 @@ vsim -c work.tb_golden
 
 > Certifique-se de que o nome da entidade do testbench está correto.
 
-### 7. Rodar a simulação
+### 8. Rodar a simulação
 Execute a simulação até o final:
 
 ```tcl
 run -all
 ```
 
-### 8. Finalizar a simulação
+### 9. Finalizar a simulação
 Após o término da simulação, finalize com:
 
 ```tcl
