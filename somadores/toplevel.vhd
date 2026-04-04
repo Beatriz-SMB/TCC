@@ -8,110 +8,19 @@ entity toplevel is
     port(
 		A       : in std_logic_vector(3 downto 0);
         B       : in std_logic_vector(3 downto 0);
-        Cin     : in std_logic;
-        sum     : out std_logic_vector(3 downto 0);
+        Cin     : in std_logic_vector(0 downto 0);
+        Result  : out std_logic_vector(3 downto 0);
         Cout    : out std_logic
     );
 end toplevel;
 
 -- architecture
 architecture behav of toplevel is
-
-    -- RCA --------------------
-    component RCA is
-        Port ( 
-            A_IN, B_IN: in std_logic_vector(3 downto 0);
-            C_IN : in std_logic;
-            SOMA_OUT : out std_logic_vector(3 downto 0);
-            C_OUT : out std_logic
-        );
-    end component;
-
-    -- CLA --------------------
-    component CLA is
-        Port ( 
-            A_IN, B_IN: in std_logic_vector(3 downto 0);
-            C_IN : in std_logic;
-            SOMA_OUT : out std_logic_vector(3 downto 0);
-            C_OUT : out std_logic
-        );
-    end component;
-    
-    -- CarrySkip --------------------
-    component carrySkip is
-        Port ( 
-            A_IN, B_IN: in std_logic_vector(3 downto 0);
-            C_IN : in std_logic;
-            SOMA_OUT : out std_logic_vector(3 downto 0);
-            C_OUT : out std_logic
-        );
-    end component;
-
-    -- CarrySelect --------------------
-    component carrySelect is
-        Port ( 
-            A_IN, B_IN: in std_logic_vector(3 downto 0);
-            C_IN : in std_logic;
-            SOMA_OUT : out std_logic_vector(3 downto 0);
-            C_OUT : out std_logic
-        );
-    end component;
-
-    -- Conditional --------------------
-    component conditional is
-        Port ( 
-            A_IN, B_IN: in std_logic_vector(3 downto 0);
-            C_IN : in std_logic;
-            SOMA_OUT : out std_logic_vector(3 downto 0);
-            C_OUT : out std_logic
-        );
-    end component;
-
+    signal temp : std_logic_vector(4 downto 0);
     begin
+        temp <= std_logic_vector(resize(unsigned(Cin), 5) + resize(unsigned(A), 5) + resize(unsigned(B), 5));
 
-    -- RCA --------------------
-    RippleCarry: RCA port map (
-        A_IN => A,
-        B_IN => B,
-        C_IN => Cin,
-        C_OUT => Cout,
-        SOMA_OUT => sum
-    );
-
-    -- CLA --------------------
-    -- CarryLookAhead: CLA port map (
-    --     A_IN => A,
-    --     B_IN => B,
-    --     C_IN => Cin,
-    --     C_OUT => Cout,
-    --     SOMA_OUT => sum
-    -- );
-
-    -- CarrySkip --------------------
-    -- CS: carrySkip port map (
-    --     A_IN => A,
-    --     B_IN => B,
-    --     C_IN => Cin,
-    --     C_OUT => Cout,
-    --     SOMA_OUT => sum
-    -- );
-
-    -- CarrySelect --------------------
-    -- CS: carrySelect port map (
-    --     A_IN => A,
-    --     B_IN => B,
-    --     C_IN => Cin,
-    --     C_OUT => Cout,
-    --     SOMA_OUT => sum
-    -- );
-
-    -- Conditional --------------------
-    -- C: conditional port map (
-    --     A_IN => A,
-    --     B_IN => B,
-    --     C_IN => Cin,
-    --     C_OUT => Cout,
-    --     SOMA_OUT => sum
-    -- );
+        Result <= temp(3 downto 0);
+        Cout <= temp(4);
 
 end behav;
