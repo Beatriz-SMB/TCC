@@ -14,20 +14,20 @@ architecture sim of tb_golden is
     port (
         A       : in std_logic_vector(3 downto 0);
         B       : in std_logic_vector(3 downto 0);
-        Cin     : in std_logic;
-        sum     : out std_logic_vector(3 downto 0);
+        Cin     : in std_logic_vector(0 downto 0);
+        Result     : out std_logic_vector(3 downto 0);
         Cout    : out std_logic
     );
     end component;
 
     signal a, b : std_logic_vector(3 downto 0);
-    signal cin : std_logic;
-    signal sum : std_logic_vector(3 downto 0);
+    signal cin : std_logic_vector(0 downto 0);
+    signal result : std_logic_vector(3 downto 0);
     signal cout : std_logic;
 
     signal dado : std_logic_vector(8 downto 0);
 
-    file gold_file : text open write_mode is "golden_vectors.txt";
+    file gold_file : text open write_mode is "resultado.txt";
 
 begin
 
@@ -36,7 +36,7 @@ begin
             A   => a,
             B   => b,
             Cin => cin,
-            sum => sum,
+            Result => result,
             Cout => cout
         );
 
@@ -53,12 +53,12 @@ begin
             wait for 1 ns;
             a <= dado(7 downto 4);
             b <= dado(3 downto 0);
-            cin <= dado(8);
+            cin <= dado(8 downto 8);
             wait for 1 ns;
 
             write(L, i);
             write(L, string'(" "));
-            write(L, std_logic'image(cin)(2));
+            write(L, to_integer(unsigned(cin)));
             write(L, string'(" "));
             write(L, string'("+"));
             write(L, string'(" "));
@@ -70,12 +70,12 @@ begin
             write(L, string'(" "));
             write(L, string'("="));
             write(L, string'(" "));
-            write(L, to_integer(unsigned(cout & sum)));
+            write(L, to_integer(unsigned(cout & result)));
 
             writeline(gold_file, L);
         end loop;
 
-        report "GOLDEN FILE GERADO COM SUCESSO" severity note;
+        report "RESULTADO GERADO COM SUCESSO" severity note;
         wait;
     end process;
 
