@@ -1,0 +1,22 @@
+# Arquivos de configuração/local
+modelsim.ini
+
+# Arquivos de texto (logs, saídas, etc.)
+*.txt
+
+# Arquivos temporários / de trabalho
+*_work
+*.work
+
+# Arquivos de banco do ModelSim
+*.qdb
+*.qpg
+
+# Pasta/arquivos de build
+_vmake
+
+# Outros específicos
+lib.qdb
+lib1_5.qdb
+lib1_5.qpg
+lib1_5.qlt
