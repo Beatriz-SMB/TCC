@@ -11,11 +11,13 @@ modelsim.ini
 # Arquivos de banco do ModelSim
 *.qdb
 *.qpg
+*.qtl
 
 # Pasta/arquivos de build
 _vmake
 
 # Outros específicos
+_info
 lib.qdb
 lib1_5.qdb
 lib1_5.qpg
