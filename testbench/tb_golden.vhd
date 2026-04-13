@@ -9,7 +9,6 @@ end entity;
 
 architecture sim of tb_golden is
 
-
     component toplevel is
     port (
         A       : in std_logic_vector(3 downto 0);
