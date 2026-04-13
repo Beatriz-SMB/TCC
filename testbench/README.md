@@ -40,8 +40,6 @@ signal dado : std_logic_vector(8 downto 0);
 
 > O sinal `dado` de 9 bits é conveniente pois a entrada total do circuito é composta por: 4 bits de `A` + 4 bits de `B` + 1 bit de `Cin` = **9 bits**, totalizando **512 combinações possíveis**.
 
----
-
 ### 3. Abertura do Arquivo de Saída
 
 O arquivo `resultado.txt` é aberto em modo de escrita para armazenar os vetores de teste e os resultados esperados:
@@ -49,8 +47,6 @@ O arquivo `resultado.txt` é aberto em modo de escrita para armazenar os vetores
 ```vhdl
 file gold_file : text open write_mode is "resultado.txt";
 ```
-
----
 
 ### 4. Instanciação do Componente (Port Map)
 
@@ -67,8 +63,6 @@ dut_inst : entity work.toplevel
     );
 ```
 
----
-
 ### 5. Início do Process e Variável de Escrita
 
 O processo principal é iniciado. Dentro dele, declara-se a variável `L` do tipo `line`, necessária para a escrita formatada no arquivo:
@@ -76,8 +70,6 @@ O processo principal é iniciado. Dentro dele, declara-se a variável `L` do tip
 ```vhdl
 variable L : line;
 ```
-
----
 
 ### 6. Escrita do Cabeçalho
 
@@ -88,8 +80,6 @@ write(L, string'("# Cin  A  B  Cout  Sum"));
 writeline(gold_file, L);
 ```
 
----
-
 ### 7. Loop de Varredura
 
 Um loop de `0` a `511` é utilizado para iterar sobre todas as combinações possíveis de entrada:
@@ -97,8 +87,6 @@ Um loop de `0` a `511` é utilizado para iterar sobre todas as combinações pos
 ```vhdl
 for i in 0 to 511 loop
 ```
-
----
 
 ### 8. Atribuição dos Valores às Entradas
 
@@ -117,8 +105,6 @@ wait for 1 ns;
 > #### Por que usar `wait for 1 ns`?
 >
 > Em VHDL, a atribuição de sinais (`<=`) não é imediata — ela ocorre após um **delta cycle** (ciclo de simulação interno). O primeiro `wait for 1 ns` garante que `dado` seja atualizado antes de ser usado para atribuir `a`, `b` e `cin`. O segundo `wait for 1 ns` garante que o circuito (`toplevel`) tenha tempo de propagar os sinais e calcular `result` e `cout` antes de os valores serem lidos e gravados no arquivo.
-
----
 
 ### 9. Escrita dos Resultados no Arquivo
 
@@ -143,8 +129,6 @@ write(L, string'(" "));
 write(L, to_integer(unsigned(result)));
 ```
 
----
-
 ### 10. Gravação da Linha no Arquivo
 
 Após compor todos os campos da linha, ela é gravada no arquivo com `writeline`:
@@ -153,15 +137,11 @@ Após compor todos os campos da linha, ela é gravada no arquivo com `writeline`
 writeline(gold_file, L);
 ```
 
----
-
 ### 11. Encerramento do Loop
 
 ```vhdl
 end loop;
 ```
-
----
 
 ### 12. Mensagem de Conclusão
 
@@ -170,8 +150,6 @@ Ao final do processo, uma mensagem é exibida no simulador indicando que o arqui
 ```vhdl
 report "RESULTADO GERADO COM SUCESSO" severity note;
 ```
-
----
 
 ### 13. Finalização do Process e da Arquitetura
 
@@ -201,8 +179,6 @@ signal cout : std_logic;
 signal dado : std_logic_vector(8 downto 0);
 ```
 
----
-
 ### 2. Abertura dos Arquivos
 
 Dois arquivos são declarados: um para **leitura** do arquivo gerado pelo `tb_golden`, e outro para **escrita** do log de validação:
@@ -211,8 +187,6 @@ Dois arquivos são declarados: um para **leitura** do arquivo gerado pelo `tb_go
 file gold_file : text open read_mode is "resultado.txt";
 file log_file  : text open write_mode is "rca.txt";
 ```
-
----
 
 ### 3. Instanciação do DUT
 
@@ -230,8 +204,6 @@ dut_rca : entity work.top
     );
 ```
 
----
-
 ### 4. Início do Process e Declaração das Variáveis
 
 O processo é iniciado e as variáveis necessárias são declaradas: `L` e `L_Log` para leitura e escrita de linhas, variáveis para armazenar os valores lidos do arquivo, variáveis para armazenar as saídas do DUT, e contadores de erros e vetores testados:
@@ -247,8 +219,6 @@ variable error_count : integer := 0;
 variable total_count : integer := 0;
 ```
 
----
-
 ### 5. Pular o Cabeçalho
 
 A primeira linha do `resultado.txt` é o cabeçalho gerado pelo `tb_golden`. Ela é lida e descartada antes de iniciar o loop:
@@ -256,8 +226,6 @@ A primeira linha do `resultado.txt` é o cabeçalho gerado pelo `tb_golden`. Ela
 ```vhdl
 readline(gold_file, L);
 ```
-
----
 
 ### 6. Escrita do Cabeçalho do Log
 
@@ -274,8 +242,6 @@ write(L_Log, string'("-------------------------------------"));
 writeline(log_file, L_Log);
 ```
 
----
-
 ### 7. Loop de Leitura e Validação
 
 Um loop `while` percorre o arquivo de resultados linha a linha até o fim:
@@ -283,8 +249,6 @@ Um loop `while` percorre o arquivo de resultados linha a linha até o fim:
 ```vhdl
 while not endfile(gold_file) loop
 ```
-
----
 
 ### 8. Leitura dos Valores do Arquivo
 
@@ -300,8 +264,6 @@ read(L, file_cout);
 read(L, file_sum);
 ```
 
----
-
 ### 9. Estímulo das Entradas do DUT
 
 Os valores lidos são convertidos e aplicados às entradas do DUT. O `wait for 1 ns` garante que o circuito propague os sinais antes da leitura das saídas:
@@ -314,8 +276,6 @@ total_count := total_count + 1;
 wait for 1 ns;
 ```
 
----
-
 ### 10. Leitura das Saídas do DUT
 
 Após a propagação, os valores de saída do DUT são capturados em variáveis inteiras para facilitar a comparação:
@@ -327,8 +287,6 @@ b_out    := to_integer(unsigned(b));
 sum_out  := to_integer(unsigned(sum));
 cout_out := to_integer(unsigned'(0 => cout));
 ```
-
----
 
 ### 11. Validação e Registro de Erros
 
@@ -360,8 +318,6 @@ end if;
 end loop;
 ```
 
----
-
 ### 12. Relatório de Resultados
 
 Ao final do loop, os totais de vetores testados e erros encontrados são exibidos no simulador e gravados no arquivo de log:
@@ -384,8 +340,6 @@ write(L_Log, string'("TOTAL DE ERROS ENCONTRADOS: "));
 write(L_Log, error_count);
 writeline(log_file, L_Log);
 ```
-
----
 
 ### 13. Resultado Final
 
