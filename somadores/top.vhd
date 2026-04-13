@@ -70,13 +70,13 @@ architecture behav of top is
     begin
 
     -- RCA --------------------
-    -- RippleCarry: RCA port map (
-    --     A_IN => A,
-    --     B_IN => B,
-    --     C_IN => Cin,
-    --     C_OUT => Cout,
-    --     SOMA_OUT => sum
-    -- );
+    RippleCarry: RCA port map (
+        A_IN => A,
+        B_IN => B,
+        C_IN => Cin,
+        C_OUT => Cout,
+        SOMA_OUT => sum
+    );
 
     -- CLA --------------------
     -- CarryLookAhead: CLA port map (
@@ -106,12 +106,12 @@ architecture behav of top is
     -- );
 
     -- Conditional --------------------
-    C: conditional port map (
-        A_IN => A,
-        B_IN => B,
-        C_IN => Cin,
-        C_OUT => Cout,
-        SOMA_OUT => sum
-    );
+    -- C: conditional port map (
+    --     A_IN => A,
+    --     B_IN => B,
+    --     C_IN => Cin,
+    --     C_OUT => Cout,
+    --     SOMA_OUT => sum
+    -- );
 
 end behav;
