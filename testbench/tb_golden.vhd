@@ -15,7 +15,7 @@ architecture sim of tb_golden is
         A       : in std_logic_vector(3 downto 0);
         B       : in std_logic_vector(3 downto 0);
         Cin     : in std_logic_vector(0 downto 0);
-        Result     : out std_logic_vector(3 downto 0);
+        Result  : out std_logic_vector(3 downto 0);
         Cout    : out std_logic
     );
     end component;
@@ -31,6 +31,7 @@ architecture sim of tb_golden is
 
 begin
 
+    -- Device Under Test : DUT
     dut_inst : entity work.toplevel
         port map (
             A   => a,
@@ -44,7 +45,7 @@ begin
         variable L : line;
     begin
         -- Cabeçalho
-        write(L, string'("# Cin + A + B = Cout & Sum"));
+        write(L, string'("# Cin  A  B  Cout  Sum"));
         writeline(gold_file, L);
 
         for i in 0 to 511 loop
@@ -59,18 +60,18 @@ begin
             write(L, i);
             write(L, string'(" "));
             write(L, to_integer(unsigned(cin)));
-            write(L, string'(" "));
-            write(L, string'("+"));
+
             write(L, string'(" "));
             write(L, to_integer(unsigned(a)));
-            write(L, string'(" "));
-            write(L, string'("+"));
+
             write(L, string'(" "));
             write(L, to_integer(unsigned(b)));
+
             write(L, string'(" "));
-            write(L, string'("="));
+            write(L, to_integer(unsigned'(0 => cout)));
+
             write(L, string'(" "));
-            write(L, to_integer(unsigned(cout & result)));
+            write(L, to_integer(unsigned(result)));
 
             writeline(gold_file, L);
         end loop;
