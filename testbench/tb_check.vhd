@@ -15,80 +15,123 @@ architecture sim of tb_check is
 
     signal dado : std_logic_vector(8 downto 0);
 
-
-    file gold_file : text open read_mode is "gold/golden_vectors.txt";
-    file log_file : text open write_mode is "gold/sim_log.txt";
+    file gold_file : text open read_mode is "resultado.txt";
+    file log_file : text open write_mode is "conditional.txt";
 
 begin
 
-    dut_inst : entity work.toplevel
+    dut_inst : entity work.top
         port map (
-            A   => a,
-            B   => b,
+            A => a,
+            B => b,
             Cin => cin,
             sum => sum,
             Cout => cout
         );
 
     process
-        variable L, L_log : line;
-        variable v_dado : integer;
+        variable L, L_Log : line;
+        -- file output
+        variable file_index : integer;
+        variable file_cin, file_a, file_b, file_cout, file_sum : integer;
 
-        variable v_A, v_B : integer;
-        variable v_Cin    : integer;
-        variable v_Sum    : integer;
-        variable v_Cout   : integer;
+        variable cin_out, a_out, b_out, sum_out, cout_out : integer;
+	    variable error_count : integer := 0;
+	    variable total_count : integer := 0;
 
-        variable sum_out  : integer;
-        variable cout_out : integer;
-
-        variable error_count : integer := 0;
-        variable total_count : integer := 0;
     begin
         -- Pula cabeçalho
         readline(gold_file, L);
 
-        write(L_log, string'("LOG DE SIMULACAO - RCA"));
-        writeline(log_file, L_log);
+        write(L_Log, string'("LOG DE SIMULACAO - TB_CHECK"));
+        writeline(log_file, L_Log);
 
+        write(L_Log, string'("Formato: status | dado | cin + a + b = sum"));
+        writeline(log_file, L_Log);
 
-        write(L_log, string'("-------------------------------------"));
-        writeline(log_file, L_log);
+        write(L_Log, string'("-------------------------------------"));
+        writeline(log_file, L_Log);
+
 
 
         while not endfile(gold_file) loop
             readline(gold_file, L);
-            read(L, v_dado);
-            read(L, v_A);
-            read(L, v_B);
-            read(L, v_Cin);
-            read(L, v_Sum);
-            read(L, v_Cout);
+            read(L, file_index);
+            read(L, file_cin);
+            read(L, file_a);
+            read(L, file_b);
+            read(L, file_cout);
+            read(L, file_sum);
 
-            -- aplica estímulos
-            A   <= std_logic_vector(to_unsigned(v_A, 4));
-            B   <= std_logic_vector(to_unsigned(v_B, 4));
-            Cin <= std_logic'val(v_Cin);
+            -- dado <= std_logic_vector(to_unsigned(v_dado, 9));
+            -- cin <= '1' when v_cin = 1 else '0';
 
-            total_count := total_count + 1;
+            -- Stimulates the inputs of the adder
+            cin <= std_logic(to_unsigned(file_cin, 1)(0));
+            a <= std_logic_vector(to_unsigned(file_a, 4));
+            b <= std_logic_vector(to_unsigned(file_b, 4));
+	        total_count := total_count + 1;
             wait for 1 ns;
             
-            -- captura saídas
-            sum_out  := to_integer(unsigned(Sum));
-            cout_out := to_integer(unsigned(Cout));
+            cin_out := to_integer(unsigned'(0 => cin));
+            a_out := to_integer(unsigned(a));
+            b_out := to_integer(unsigned(b));
+            sum_out := to_integer(unsigned(sum));
+            cout_out := to_integer(unsigned'(0 => cout));
 
-           
+            if not (sum_out = to_integer(unsigned(std_logic_vector(to_unsigned(file_sum, 4)))) and
+    		cin_out = to_integer(unsigned(std_logic_vector(to_unsigned(file_cin, 1)))) and
+    		a_out = to_integer(unsigned(std_logic_vector(to_unsigned(file_a, 4)))) and
+    		b_out = to_integer(unsigned(std_logic_vector(to_unsigned(file_b, 4)))) and
+            cout_out = to_integer(unsigned(std_logic_vector(to_unsigned(file_cout, 1))))
+			) then
+    			error_count := error_count + 1;
+
+                write(L_Log, string'("ERRO | indice="));
+                write(L_Log, file_index);
+                write(L_Log, string'(" | esperado=("));
+                write(L_Log, file_cout); write(L_Log, string'(" , "));
+                write(L_Log, file_sum); write(L_Log, string'(") obtido=("));
+                write(L_Log, cin_out); write(L_Log, string'(" , "));
+                write(L_Log, a_out); write(L_Log, string'(" , "));
+                write(L_Log, b_out); write(L_Log, string'(" , "));
+                write(L_Log, cout_out); write(L_Log, string'(" , "));
+                write(L_Log, sum_out); write(L_Log, string'(")"));
+
+                writeline(log_file, L_Log);
+            end if;
         end loop;
 
-        report "--------------------------------" severity note;
-        report "TOTAL TESTES: " & integer'image(total_count) severity note;
-        report "TOTAL ERROS:  " & integer'image(error_count) severity note;
+        report "----------------------------------------" severity note;
+	    report "TOTAL DE VETORES TESTADOS: " & integer'image(total_count) severity note;
+	    report "TOTAL DE ERROS ENCONTRADOS: " & integer'image(error_count) severity note;
 
-        if error_count = 0 then
-            report "RCA PASSOU EM TODOS OS TESTES ✅" severity note;
-        else
-            report "RCA FALHOU NOS TESTES ❌" severity failure;
-        end if;
+
+        write(L_Log, string'("------------------------------"));
+        writeline(log_file, L_Log);
+
+        write(L_Log, string'("TOTAL DE VETORES TESTADOS: "));
+        write(L_Log, total_count);
+        writeline(log_file, L_Log);
+
+        write(L_Log, string'("TOTAL DE ERROS ENCONTRADOS: "));
+        write(L_Log, error_count);
+        writeline(log_file, L_Log);
+
+	if error_count = 0 then
+   		write(L_Log, string'("Projeto PASSOU no teste"));
+        writeline(log_file, L_Log);
+
+        report "RESULTADO FINAL: PROJETO DO ALUNO PASSOU NO TESTE"
+        	severity failure;
+
+	else
+    	write(L_Log, string'("Projeto FALHOU no teste"));
+        writeline(log_file, L_Log);
+        report "RESULTADO FINAL: PROJETO DO ALUNO FALHOU NO TESTE"
+        severity failure;
+
+	end if;
 
         wait;
     end process;
