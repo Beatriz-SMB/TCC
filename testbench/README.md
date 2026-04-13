@@ -25,8 +25,6 @@ component toplevel is
 end component;
 ```
 
----
-
 ### 2. Declaração dos Sinais
 
 Em seguida, são declarados os sinais internos que serão conectados ao componente, além de um sinal auxiliar `dado` de 9 bits que será usado para varrer todas as combinações de entrada:
