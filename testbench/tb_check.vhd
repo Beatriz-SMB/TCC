@@ -16,11 +16,12 @@ architecture sim of tb_check is
     signal dado : std_logic_vector(8 downto 0);
 
     file gold_file : text open read_mode is "resultado.txt";
-    file log_file : text open write_mode is "conditional.txt";
+    file log_file : text open write_mode is "rca.txt";
 
 begin
 
-    dut_inst : entity work.top
+    -- Device Under Test : DUT
+    dut_rca : entity work.top
         port map (
             A => a,
             B => b,
