@@ -48,7 +48,7 @@ Com a pasta `work` criada, no Transcript, vá até o diretório onde está o pro
 cd "C:/Users/Beatriz/Desktop/TCC"
 ```
 
-> Ajuste o caminho caso seu projeto esteja em outro local.
+> Ajuste o caminho caso seu projeto esteja em outro local. Substitua \ por / no caminho (ex: C:\Users\Beatriz\Desktop\TCC → C:/Users/Beatriz/Desktop/TCC).
 
 ### 5. Compilar os arquivos VHDL do projeto
 Compile todos os arquivos `.vhd` da pasta principal do projeto:
@@ -68,7 +68,7 @@ vcom testbench/tb_teste.vhd
 Inicie a simulação chamando a entidade do testbench:
 
 ```tcl
-vsim -c work.tb_golden
+vsim -c work.tb_teste
 ```
 
 > Certifique-se de que o nome da entidade do testbench está correto.
