@@ -8,20 +8,20 @@ end entity;
 
 architecture sim of tb_check is
 
-    signal a, b : std_logic_vector(3 downto 0);
+    signal a, b : std_logic_vector(7 downto 0);
     signal cin : std_logic;
-    signal sum : std_logic_vector(3 downto 0);
+    signal sum : std_logic_vector(7 downto 0);
     signal cout : std_logic;
 
-    signal dado : std_logic_vector(8 downto 0);
+    signal dado : std_logic_vector(16 downto 0);
 
-    file gold_file : text open read_mode is "resultado.txt";
-    file log_file : text open write_mode is "rca.txt";
+    file gold_file : text open read_mode is "resultado_8bit.txt";
+    file log_file : text open write_mode is "KoggeStone_8bit.txt";
 
 begin
 
     -- Device Under Test : DUT
-    dut_rca : entity work.top
+        dut : entity work.top
         port map (
             A => a,
             B => b,
@@ -47,7 +47,7 @@ begin
         write(L_Log, string'("LOG DE SIMULACAO - TB_CHECK"));
         writeline(log_file, L_Log);
 
-        write(L_Log, string'("Formato: status | dado | cin + a + b = sum"));
+        write(L_Log, string'("Formato: status | dado | cin + a + b = Cout & sum"));
         writeline(log_file, L_Log);
 
         write(L_Log, string'("-------------------------------------"));
@@ -69,8 +69,8 @@ begin
 
             -- Stimulates the inputs of the adder
             cin <= std_logic(to_unsigned(file_cin, 1)(0));
-            a <= std_logic_vector(to_unsigned(file_a, 4));
-            b <= std_logic_vector(to_unsigned(file_b, 4));
+            a <= std_logic_vector(to_unsigned(file_a, 8));
+            b <= std_logic_vector(to_unsigned(file_b, 8));
 	        total_count := total_count + 1;
             wait for 1 ns;
             
@@ -80,10 +80,10 @@ begin
             sum_out := to_integer(unsigned(sum));
             cout_out := to_integer(unsigned'(0 => cout));
 
-            if not (sum_out = to_integer(unsigned(std_logic_vector(to_unsigned(file_sum, 4)))) and
+            if not (sum_out = to_integer(unsigned(std_logic_vector(to_unsigned(file_sum, 8)))) and
     		cin_out = to_integer(unsigned(std_logic_vector(to_unsigned(file_cin, 1)))) and
-    		a_out = to_integer(unsigned(std_logic_vector(to_unsigned(file_a, 4)))) and
-    		b_out = to_integer(unsigned(std_logic_vector(to_unsigned(file_b, 4)))) and
+    		a_out = to_integer(unsigned(std_logic_vector(to_unsigned(file_a, 8)))) and
+    		b_out = to_integer(unsigned(std_logic_vector(to_unsigned(file_b, 8)))) and
             cout_out = to_integer(unsigned(std_logic_vector(to_unsigned(file_cout, 1))))
 			) then
     			error_count := error_count + 1;
