@@ -31,8 +31,6 @@ architecture behav of KoggeStone_8bit is
 
     -- stage 4:
     signal C : std_logic_vector(7 downto 0);
-
-    -- stage 5:
     signal S : std_logic_vector(7 downto 0);
 
 begin
@@ -89,7 +87,6 @@ begin
 
 
     -- stage 2:
-
     P2(0) <= P1(0);
     G2(0) <= G1(0);
 
@@ -140,8 +137,8 @@ begin
     P3(7) <= P2(7) and P2(3);
     G3(7) <= (P2(7) and G2(3)) or G2(7);
 
-    -- stage 3:
 
+    -- stage 4:
     C(0) <= G3(0) or (C_IN and P3(0));
     C(1) <= G3(1) or (C(0) and P3(1));
     C(2) <= G3(2) or (C(1) and P3(2));
@@ -151,15 +148,14 @@ begin
     C(6) <= G3(6) or (C(5) and P3(6));
     C(7) <= G3(7) or (C(6) and P3(7));
 
-    -- stage 4:
-    S(0) <= P3(0) xor C_IN;
-    S(1) <= P3(1) xor C(0);
-    S(2) <= P3(2) xor C(1);
-    S(3) <= P3(3) xor C(2);
-    S(4) <= P3(4) xor C(3);
-    S(5) <= P3(5) xor C(4);
-    S(6) <= P3(6) xor C(5);
-    S(7) <= P3(7) xor C(6);
+    S(0) <= P0(0) xor C_IN;
+    S(1) <= P0(1) xor C(0);
+    S(2) <= P0(2) xor C(1);
+    S(3) <= P0(3) xor C(2);
+    S(4) <= P0(4) xor C(3);
+    S(5) <= P0(5) xor C(4);
+    S(6) <= P0(6) xor C(5);
+    S(7) <= P0(7) xor C(6);
 
     SOMA_OUT <= S; 
     C_OUT <= C(7);

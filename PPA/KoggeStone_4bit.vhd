@@ -24,9 +24,10 @@ architecture behav of KoggeStone_4bit is
     signal G1, P1 : std_logic_vector(3 downto 0);
 
     -- stage 2:
-    signal C : std_logic_vector(3 downto 0);
+    signal G2, P2 : std_logic_vector(3 downto 0);
 
     -- stage 3:
+    signal C : std_logic_vector(3 downto 0);
     signal S : std_logic_vector(3 downto 0);
 
 begin
@@ -44,7 +45,6 @@ begin
     G0(3) <= A_IN(3) and B_IN(3);
 
     -- stage 1:
-
     P1(0) <= P0(0);
     G1(0) <= G0(0);
 
@@ -58,16 +58,28 @@ begin
     G1(3) <= (P0(3) and G0(2)) or G0(3);
 
     -- stage 2:
-    C(0) <= G1(0) or (C_IN and P1(0));
-    C(1) <= G1(1) or (C(0) and P1(1));
-    C(2) <= G1(2) or (C(1) and P1(2));
-    C(3) <= G1(3) or (C(2) and P1(3));
+    P2(0) <= P1(0);
+    G2(0) <= G1(0);
+
+    P2(1) <= P1(1);
+    G2(1) <= G1(1);
+
+    P2(2) <= P1(2) and P1(0);
+    G2(2) <= (P1(2) and G1(0)) or G1(2);
+
+    P2(3) <= P1(3) and P1(1);
+    G2(3) <= (P1(3) and G1(1)) or G1(3);
 
     -- stage 3:
-    S(0) <= P1(0) xor C_IN;
-    S(1) <= P1(1) xor C(0);
-    S(2) <= P1(2) xor C(1);
-    S(3) <= P1(3) xor C(2);  
+    C(0) <= G2(0) or (C_IN and P2(0));
+    C(1) <= G2(1) or (C(0) and P2(1));
+    C(2) <= G2(2) or (C(1) and P2(2));
+    C(3) <= G2(3) or (C(2) and P2(3));
+
+    S(0) <= P0(0) xor C_IN;
+    S(1) <= P0(1) xor C(0);
+    S(2) <= P0(2) xor C(1);
+    S(3) <= P0(3) xor C(2);  
     
     SOMA_OUT <= S; 
     C_OUT <= C(3);
