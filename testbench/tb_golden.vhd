@@ -11,22 +11,22 @@ architecture sim of tb_golden is
 
     component toplevel is
     port (
-        A       : in std_logic_vector(3 downto 0);
-        B       : in std_logic_vector(3 downto 0);
+        A       : in std_logic_vector(7 downto 0);
+        B       : in std_logic_vector(7 downto 0);
         Cin     : in std_logic_vector(0 downto 0);
-        Result  : out std_logic_vector(3 downto 0);
+        Result  : out std_logic_vector(7 downto 0);
         Cout    : out std_logic
     );
     end component;
 
-    signal a, b : std_logic_vector(3 downto 0);
+    signal a, b : std_logic_vector(7 downto 0);
     signal cin : std_logic_vector(0 downto 0);
-    signal result : std_logic_vector(3 downto 0);
+    signal result : std_logic_vector(7 downto 0);
     signal cout : std_logic;
 
-    signal dado : std_logic_vector(8 downto 0);
+    signal dado : std_logic_vector(16 downto 0);
 
-    file gold_file : text open write_mode is "resultado.txt";
+    file gold_file : text open write_mode is "resultado_8bit.txt";
 
 begin
 
@@ -47,13 +47,13 @@ begin
         write(L, string'("# Cin  A  B  Cout  Sum"));
         writeline(gold_file, L);
 
-        for i in 0 to 511 loop
-            dado <= std_logic_vector(to_unsigned(i, 9));
+        for i in 0 to 131071 loop
+            dado <= std_logic_vector(to_unsigned(i, 17));
           
             wait for 1 ns;
-            a <= dado(7 downto 4);
-            b <= dado(3 downto 0);
-            cin <= dado(8 downto 8);
+            a <= dado(15 downto 8);
+            b <= dado(7 downto 0);
+            cin <= dado(16 downto 16);
             wait for 1 ns;
 
             write(L, i);
