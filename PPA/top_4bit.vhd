@@ -4,7 +4,7 @@ use IEEE.STD_LOGIC_1164.ALL;
 use IEEE.NUMERIC_STD.ALL;
 
 -- entity
-entity top is
+entity top_4bit is
     port(
 		A       : in std_logic_vector(3 downto 0);
         B       : in std_logic_vector(3 downto 0);
@@ -12,10 +12,10 @@ entity top is
         sum     : out std_logic_vector(3 downto 0);
         Cout    : out std_logic
     );
-end top;
+end top_4bit;
 
 -- architecture
-architecture behav of top is
+architecture behav of top_4bit is
 
     -- KoggeStone --------------------
     component KoggeStone_4bit is
