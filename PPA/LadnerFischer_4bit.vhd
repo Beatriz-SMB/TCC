@@ -54,7 +54,7 @@ begin
     G32 <= (P(3) and G(2)) or G(3);
 
     P20 <= P(2) and P10;
-    G20 <= (P(2) and G(1)) or G10;
+    G20 <= (P(2) and G10) or G(2);
 
     P30 <= P32 and P10;
     G30 <= (P32 and G10) or G32;

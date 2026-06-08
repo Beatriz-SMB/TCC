@@ -68,7 +68,7 @@ begin
     G76 <= (P(7) and G(6)) or G(7);
 
     P20 <= P(2) and P10;
-    G20 <= (P(2) and G(1)) or G10;
+    G20 <= (P(2) and G10) or G(2);
 
     P30 <= P32 and P10;
     G30 <= (P32 and G10) or G32;
@@ -89,7 +89,6 @@ begin
     G70 <= (P74 and G30) or G74;
 
     -- stage 3:
-
     C(0) <= G(0) or (C_IN and P(0));
     C(1) <= G10 or (C(0) and P10);
     C(2) <= G20 or (C(1) and P20);
