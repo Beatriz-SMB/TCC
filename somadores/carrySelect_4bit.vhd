@@ -4,7 +4,7 @@ use IEEE.STD_LOGIC_1164.ALL;
 use IEEE.NUMERIC_STD.ALL;
 
 -- entity
-entity carrySelect is
+entity carrySelect_4bit is
     Port ( 
         A_IN : in std_logic_vector(3 downto 0);
         B_IN : in std_logic_vector(3 downto 0);
@@ -12,10 +12,10 @@ entity carrySelect is
         SOMA_OUT : out std_logic_vector(3 downto 0);
         C_OUT : out std_logic
     );
-end carrySelect;
+end carrySelect_4bit;
 
 -- architecture
-architecture behav of carrySelect is
+architecture behav of carrySelect_4bit is
     -- Full Adder --------------------
     component fullAdder is
         Port ( 
