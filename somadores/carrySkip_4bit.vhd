@@ -4,7 +4,7 @@ use IEEE.STD_LOGIC_1164.ALL;
 use IEEE.NUMERIC_STD.ALL;
 
 -- entity
-entity carrySkip is
+entity carrySkip_4bit is
     Port ( 
         A_IN : in std_logic_vector(3 downto 0);
         B_IN : in std_logic_vector(3 downto 0);
@@ -12,10 +12,10 @@ entity carrySkip is
         SOMA_OUT : out std_logic_vector(3 downto 0);
         C_OUT : out std_logic
     );
-end carrySkip;
+end carrySkip_4bit;
 
 -- architecture
-architecture behav of carrySkip is
+architecture behav of carrySkip_4bit is
     -- Full Adder --------------------
     component fullAdder is
         port ( 
