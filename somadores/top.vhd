@@ -18,7 +18,7 @@ end top;
 architecture behav of top is
 
     -- RCA --------------------
-    component RCA is
+    component rca_4bit is
         Port ( 
             A_IN, B_IN: in std_logic_vector(3 downto 0);
             C_IN : in std_logic;
@@ -28,7 +28,7 @@ architecture behav of top is
     end component;
 
     -- CLA --------------------
-    component CLA is
+    component clA_4bit is
         Port ( 
             A_IN, B_IN: in std_logic_vector(3 downto 0);
             C_IN : in std_logic;
@@ -38,7 +38,7 @@ architecture behav of top is
     end component;
     
     -- CarrySkip --------------------
-    component carrySkip is
+    component carrySkip_4bit is
         Port ( 
             A_IN, B_IN: in std_logic_vector(3 downto 0);
             C_IN : in std_logic;
@@ -48,7 +48,7 @@ architecture behav of top is
     end component;
 
     -- CarrySelect --------------------
-    component carrySelect is
+    component carrySelect_4bit is
         Port ( 
             A_IN, B_IN: in std_logic_vector(3 downto 0);
             C_IN : in std_logic;
@@ -58,7 +58,7 @@ architecture behav of top is
     end component;
 
     -- Conditional --------------------
-    component conditional is
+    component conditional_4bit is
         Port ( 
             A_IN, B_IN: in std_logic_vector(3 downto 0);
             C_IN : in std_logic;
@@ -70,7 +70,7 @@ architecture behav of top is
     begin
 
     -- RCA --------------------
-    RippleCarry: RCA port map (
+    RippleCarry: rca_4bit port map (
         A_IN => A,
         B_IN => B,
         C_IN => Cin,
@@ -79,7 +79,7 @@ architecture behav of top is
     );
 
     -- CLA --------------------
-    -- CarryLookAhead: CLA port map (
+    -- CarryLookAhead: clA_4bit port map (
     --     A_IN => A,
     --     B_IN => B,
     --     C_IN => Cin,
@@ -88,7 +88,7 @@ architecture behav of top is
     -- );
 
     -- CarrySkip --------------------
-    -- CS: carrySkip port map (
+    -- CS: carrySkip_4bit port map (
     --     A_IN => A,
     --     B_IN => B,
     --     C_IN => Cin,
@@ -97,7 +97,7 @@ architecture behav of top is
     -- );
 
     -- CarrySelect --------------------
-    -- CS: carrySelect port map (
+    -- CS: carrySelect_4bit port map (
     --     A_IN => A,
     --     B_IN => B,
     --     C_IN => Cin,
@@ -106,7 +106,7 @@ architecture behav of top is
     -- );
 
     -- Conditional --------------------
-    -- C: conditional port map (
+    -- C: conditional_4bit port map (
     --     A_IN => A,
     --     B_IN => B,
     --     C_IN => Cin,
