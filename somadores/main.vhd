@@ -6,13 +6,13 @@ use IEEE.NUMERIC_STD.ALL;
 -- entity
 entity main is
     port(
-		A       : in std_logic_vector(3 downto 0);
-        B       : in std_logic_vector(3 downto 0);
-        Cin     : in std_logic;
-        sum     : out std_logic_vector(3 downto 0);
+		a_in       : in std_logic_vector(7 downto 0);
+        b_in       : in std_logic_vector(7 downto 0);
+        c_in     : in std_logic;
+        sum_out     : out std_logic_vector(7 downto 0);
         clk     : in std_logic; 
         reset   : in std_logic;
-        Cout    : out std_logic
+        c_out    : out std_logic
     );
 end main;
 
@@ -39,81 +39,81 @@ architecture behav of main is
     end component;
 
     -- RCA --------------------
-    component rca is
+    component rca_8bit is
         Port ( 
-            A_IN, B_IN: in std_logic_vector(3 downto 0);
-            C_IN : in std_logic;
-            SOMA_OUT : out std_logic_vector(3 downto 0);
-            C_OUT : out std_logic
+            A, B: in std_logic_vector(7 downto 0);
+            Cin : in std_logic;
+            Sum : out std_logic_vector(7 downto 0);
+            Cout : out std_logic
         );
     end component;
 
     -- CLA --------------------
-    component cla is
+    component cla_8bit is
         Port ( 
-            A_IN, B_IN: in std_logic_vector(3 downto 0);
-            C_IN : in std_logic;
-            SOMA_OUT : out std_logic_vector(3 downto 0);
-            C_OUT : out std_logic
+            A, B: in std_logic_vector(7 downto 0);
+            Cin : in std_logic;
+            Sum : out std_logic_vector(7 downto 0);
+            Cout : out std_logic
         );
     end component;
     
     -- CarrySkip --------------------
-    component carrySkip is
+    component carrySkip_8bit is
         Port ( 
-            A_IN, B_IN: in std_logic_vector(3 downto 0);
-            C_IN : in std_logic;
-            SOMA_OUT : out std_logic_vector(3 downto 0);
-            C_OUT : out std_logic
+            A, B: in std_logic_vector(7 downto 0);
+            Cin : in std_logic;
+            Sum : out std_logic_vector(7 downto 0);
+            Cout : out std_logic
         );
     end component;
 
     -- CarrySelect --------------------
-    component carrySelect is
+    component carrySelect_8bit is
         Port ( 
-            A_IN, B_IN: in std_logic_vector(3 downto 0);
-            C_IN : in std_logic;
-            SOMA_OUT : out std_logic_vector(3 downto 0);
-            C_OUT : out std_logic
+            A, B: in std_logic_vector(7 downto 0);
+            Cin : in std_logic;
+            Sum : out std_logic_vector(7 downto 0);
+            Cout : out std_logic
         );
     end component;
 
     -- Conditional --------------------
-    component conditional is
+    component conditional_8bit is
         Port ( 
-            A_IN, B_IN: in std_logic_vector(3 downto 0);
-            C_IN : in std_logic;
-            SOMA_OUT : out std_logic_vector(3 downto 0);
-            C_OUT : out std_logic
+            A, B: in std_logic_vector(7 downto 0);
+            Cin : in std_logic;
+            Sum : out std_logic_vector(7 downto 0);
+            Cout : out std_logic
         );
     end component;
 
     signal s_cin : std_logic;
     signal s_cout : std_logic;
 
-    signal s_sum : std_logic_vector(3 downto 0);
-    signal s_A, s_B : std_logic_vector(3 downto 0);
+    signal s_sum : std_logic_vector(7 downto 0);
+    signal s_A, s_B : std_logic_vector(7 downto 0);
 
 
     begin
 
     -- RCA --------------------
-    -- flipflopDA : genericFlipflopD generic map(4) port map (
-    --     d => A,
+    -- flipflopDA : genericFlipflopD generic map(8) port map (
+    --     d => a_in,
     --     clk => clk,
     --     reset => reset,
     --     q => s_A
 	-- );
 
-    -- flipflopDB : genericFlipflopD generic map(4) port map (
-    --     d => B,
+    -- flipflopDB : genericFlipflopD generic map(8) port map (
+    --     d => b_in,
     --     clk => clk,
     --     reset => reset,
     --     q => s_B
 	-- );
 	 
 	-- flipflopDcin : flipflopD port map (
-    --     D => Cin,
+    --     D => c_in,
     --     CLK => clk,
     --     RESET => reset,
     --     Q => s_cin
@@ -123,41 +123,41 @@ architecture behav of main is
     --     D => s_cout,
     --     CLK => clk,
     --     RESET => reset,
-    --     Q => Cout
+    --     Q => c_out
 	-- );
 
-    -- flipflopDsum : genericFlipflopD generic map(4) port map (
+    -- flipflopDsum : genericFlipflopD generic map(8) port map (
     --     d => s_sum,
     --     clk => clk,
     --     reset => reset,
-    --     q => sum
+    --     q => sum_out
 	-- );
 
-    -- RippleCarry: rca port map (
-    --     A_IN => s_A,
-    --     B_IN => s_B,
-    --     C_IN => s_cin,
-    --     C_OUT => s_cout,
-    --     SOMA_OUT => s_sum
+    -- RippleCarry: rca_8bit port map (
+    --     A => s_A,
+    --     B => s_B,
+    --     Cin => s_cin,
+    --     Cout => s_cout,
+    --     Sum => s_sum
     -- );
 
     -- CLA --------------------
-    -- flipflopDA : genericFlipflopD generic map(4) port map (
-    --     d => A,
+    -- flipflopDA : genericFlipflopD generic map(8) port map (
+    --     d => a_in,
     --     clk => clk,
     --     reset => reset,
     --     q => s_A
 	-- );
 
-    -- flipflopDB : genericFlipflopD generic map(4) port map (
-    --     d => B,
+    -- flipflopDB : genericFlipflopD generic map(8) port map (
+    --     d => b_in,
     --     clk => clk,
     --     reset => reset,
     --     q => s_B
 	-- );
 	 
 	-- flipflopDcin : flipflopD port map (
-    --     D => Cin,
+    --     D => c_in,
     --     CLK => clk,
     --     RESET => reset,
     --     Q => s_cin
@@ -167,41 +167,41 @@ architecture behav of main is
     --     D => s_cout,
     --     CLK => clk,
     --     RESET => reset,
-    --     Q => Cout
+    --     Q => c_out
 	-- );
 
-    -- flipflopDsum : genericFlipflopD generic map(4) port map (
+    -- flipflopDsum : genericFlipflopD generic map(8) port map (
     --     d => s_sum,
     --     clk => clk,
     --     reset => reset,
-    --     q => sum
+    --     q => sum_out
 	-- );
 
-    -- CarryLookAhead: cla port map (
-    --     A_IN => s_A,
-    --     B_IN => s_B,
-    --     C_IN => s_cin,
-    --     C_OUT => s_cout,
-    --     SOMA_OUT => s_sum
+    -- CarryLookAhead: cla_8bit port map (
+    --     A => s_A,
+    --     B => s_B,
+    --     Cin => s_cin,
+    --     Cout => s_cout,
+    --     Sum => s_sum
     -- );
 
     -- CarrySkip --------------------
-    -- flipflopDA : genericFlipflopD generic map(4) port map (
-    --     d => A,
+    -- flipflopDA : genericFlipflopD generic map(8) port map (
+    --     d => a_in,
     --     clk => clk,
     --     reset => reset,
     --     q => s_A
 	-- );
 
-    -- flipflopDB : genericFlipflopD generic map(4) port map (
-    --     d => B,
+    -- flipflopDB : genericFlipflopD generic map(8) port map (
+    --     d => b_in,
     --     clk => clk,
     --     reset => reset,
     --     q => s_B
 	-- );
 	 
 	-- flipflopDcin : flipflopD port map (
-    --     D => Cin,
+    --     D => c_in,
     --     CLK => clk,
     --     RESET => reset,
     --     Q => s_cin
@@ -211,85 +211,85 @@ architecture behav of main is
     --     D => s_cout,
     --     CLK => clk,
     --     RESET => reset,
-    --     Q => Cout
+    --     Q => c_out
 	-- );
 
-    -- flipflopDsum : genericFlipflopD generic map(4) port map (
+    -- flipflopDsum : genericFlipflopD generic map(8) port map (
     --     d => s_sum,
     --     clk => clk,
     --     reset => reset,
-    --     q => sum
+    --     q => sum_out
 	-- );
 
-    -- CS: carrySkip port map (
-    --     A_IN => s_A,
-    --     B_IN => s_B,
-    --     C_IN => s_cin,
-    --     C_OUT => s_cout,
-    --     SOMA_OUT => s_sum
+    -- CS: carrySkip_8bit port map (
+    --     A => s_A,
+    --     B => s_B,
+    --     Cin => s_cin,
+    --     Cout => s_cout,
+    --     Sum => s_sum
     -- );
 
     -- CarrySelect --------------------
-    -- flipflopDA : genericFlipflopD generic map(4) port map (
-    --     d => A,
-    --     clk => clk,
-    --     reset => reset,
-    --     q => s_A
-	-- );
+    flipflopDA : genericFlipflopD generic map(8) port map (
+        d => a_in,
+        clk => clk,
+        reset => reset,
+        q => s_A
+	);
 
-    -- flipflopDB : genericFlipflopD generic map(4) port map (
-    --     d => B,
-    --     clk => clk,
-    --     reset => reset,
-    --     q => s_B
-	-- );
+    flipflopDB : genericFlipflopD generic map(8) port map (
+        d => b_in,
+        clk => clk,
+        reset => reset,
+        q => s_B
+	);
 	 
-	-- flipflopDcin : flipflopD port map (
-    --     D => Cin,
-    --     CLK => clk,
-    --     RESET => reset,
-    --     Q => s_cin
-	-- );
+	flipflopDcin : flipflopD port map (
+        D => c_in,
+        CLK => clk,
+        RESET => reset,
+        Q => s_cin
+	);
 
-    -- flipflopDcout : flipflopD port map (
-    --     D => s_cout,
-    --     CLK => clk,
-    --     RESET => reset,
-    --     Q => Cout
-	-- );
+    flipflopDcout : flipflopD port map (
+        D => s_cout,
+        CLK => clk,
+        RESET => reset,
+        Q => c_out
+	);
 
-    -- flipflopDsum : genericFlipflopD generic map(4) port map (
-    --     d => s_sum,
-    --     clk => clk,
-    --     reset => reset,
-    --     q => sum
-	-- );
+    flipflopDsum : genericFlipflopD generic map(8) port map (
+        d => s_sum,
+        clk => clk,
+        reset => reset,
+        q => sum_out
+	);
 
-    -- CS: carrySelect port map (
-    --     A_IN => s_A,
-    --     B_IN => s_B,
-    --     C_IN => s_cin,
-    --     C_OUT => s_cout,
-    --     SOMA_OUT => s_sum
-    -- );
+    CS: carrySelect_8bit port map (
+        A => s_A,
+        B => s_B,
+        Cin => s_cin,
+        Cout => s_cout,
+        Sum => s_sum
+    );
 
     -- Conditional --------------------
-    -- flipflopDA : genericFlipflopD generic map(4) port map (
-    --     d => A,
+    -- flipflopDA : genericFlipflopD generic map(8) port map (
+    --     d => a_in,
     --     clk => clk,
     --     reset => reset,
     --     q => s_A
 	-- );
 
-    -- flipflopDB : genericFlipflopD generic map(4) port map (
-    --     d => B,
+    -- flipflopDB : genericFlipflopD generic map(8) port map (
+    --     d => b_in,
     --     clk => clk,
     --     reset => reset,
     --     q => s_B
 	-- );
 	 
 	-- flipflopDcin : flipflopD port map (
-    --     D => Cin,
+    --     D => c_in,
     --     CLK => clk,
     --     RESET => reset,
     --     Q => s_cin
@@ -299,22 +299,22 @@ architecture behav of main is
     --     D => s_cout,
     --     CLK => clk,
     --     RESET => reset,
-    --     Q => Cout
+    --     Q => c_out
 	-- );
 
-    -- flipflopDsum : genericFlipflopD generic map(4) port map (
+    -- flipflopDsum : genericFlipflopD generic map(8) port map (
     --     d => s_sum,
     --     clk => clk,
     --     reset => reset,
-    --     q => sum
+    --     q => sum_out
 	-- );
 
-    -- C: conditional port map (
-    --     A_IN => s_A,
-    --     B_IN => s_B,
-    --     C_IN => s_cin,
-    --     C_OUT => s_cout,
-    --     SOMA_OUT => s_sum
+    -- C: conditional_8bit port map (
+    --     A => s_A,
+    --     B => s_B,
+    --     Cin => s_cin,
+    --     Cout => s_cout,
+    --     Sum => s_sum
     -- );
 
 end behav;
