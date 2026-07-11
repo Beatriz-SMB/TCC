@@ -230,48 +230,48 @@ architecture behav of main is
     -- );
 
     -- CarrySelect --------------------
-    flipflopDA : genericFlipflopD generic map(8) port map (
-        d => a_in,
-        clk => clk,
-        reset => reset,
-        q => s_A
-	);
+    -- flipflopDA : genericFlipflopD generic map(8) port map (
+    --     d => a_in,
+    --     clk => clk,
+    --     reset => reset,
+    --     q => s_A
+	-- );
 
-    flipflopDB : genericFlipflopD generic map(8) port map (
-        d => b_in,
-        clk => clk,
-        reset => reset,
-        q => s_B
-	);
+    -- flipflopDB : genericFlipflopD generic map(8) port map (
+    --     d => b_in,
+    --     clk => clk,
+    --     reset => reset,
+    --     q => s_B
+	-- );
 	 
-	flipflopDcin : flipflopD port map (
-        D => c_in,
-        CLK => clk,
-        RESET => reset,
-        Q => s_cin
-	);
+	-- flipflopDcin : flipflopD port map (
+    --     D => c_in,
+    --     CLK => clk,
+    --     RESET => reset,
+    --     Q => s_cin
+	-- );
 
-    flipflopDcout : flipflopD port map (
-        D => s_cout,
-        CLK => clk,
-        RESET => reset,
-        Q => c_out
-	);
+    -- flipflopDcout : flipflopD port map (
+    --     D => s_cout,
+    --     CLK => clk,
+    --     RESET => reset,
+    --     Q => c_out
+	-- );
 
-    flipflopDsum : genericFlipflopD generic map(8) port map (
-        d => s_sum,
-        clk => clk,
-        reset => reset,
-        q => sum_out
-	);
+    -- flipflopDsum : genericFlipflopD generic map(8) port map (
+    --     d => s_sum,
+    --     clk => clk,
+    --     reset => reset,
+    --     q => sum_out
+	-- );
 
-    CS: carrySelect_8bit port map (
-        A => s_A,
-        B => s_B,
-        Cin => s_cin,
-        Cout => s_cout,
-        Sum => s_sum
-    );
+    -- CS: carrySelect_8bit port map (
+    --     A => s_A,
+    --     B => s_B,
+    --     Cin => s_cin,
+    --     Cout => s_cout,
+    --     Sum => s_sum
+    -- );
 
     -- Conditional --------------------
     -- flipflopDA : genericFlipflopD generic map(8) port map (
