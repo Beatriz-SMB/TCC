@@ -134,7 +134,6 @@ begin
     P3(7) <= P2(7) and P2(3);
     G3(7) <= (P2(7) and G2(3)) or G2(7);
 
-
     -- post processing:
     C(0) <= G3(0) or (C_IN and P3(0));
     C(1) <= G3(1) or (C(0) and P3(1));
