@@ -60,13 +60,13 @@ architecture behav of top is
     begin
 
     -- KoggeStone --------------------
-    -- KoggeStoneAdder: KoggeStone port map (
-    --     A_IN => A,
-    --     B_IN => B,
-    --     C_IN => Cin,
-    --     C_OUT => Cout,
-    --     SOMA_OUT => sum
-    -- );
+    KoggeStoneAdder: KoggeStone port map (
+        A_IN => A,
+        B_IN => B,
+        C_IN => Cin,
+        C_OUT => Cout,
+        SOMA_OUT => sum
+    );
 
     -- BrentKung --------------------
     -- BrentKungAdder: BrentKung port map (
@@ -87,12 +87,12 @@ architecture behav of top is
     -- );
 
     -- LadnerFischer --------------------
-    LF: LadnerFischer port map (
-        A_IN => A,
-        B_IN => B,
-        C_IN => Cin,
-        C_OUT => Cout,
-        SOMA_OUT => sum
-    );
+    -- LF: LadnerFischer port map (
+    --     A_IN => A,
+    --     B_IN => B,
+    --     C_IN => Cin,
+    --     C_OUT => Cout,
+    --     SOMA_OUT => sum
+    -- );
 
 end behav;
