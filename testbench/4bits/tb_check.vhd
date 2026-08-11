@@ -16,7 +16,7 @@ architecture sim of tb_check is
     signal dado : std_logic_vector(8 downto 0);
 
     file gold_file : text open read_mode is "4 bits/resultado.txt";
-    file log_file : text open write_mode is "4 bits/LadnerFischer.txt";
+    file log_file : text open write_mode is "4 bits/Conditional.txt";
 
 begin
 
