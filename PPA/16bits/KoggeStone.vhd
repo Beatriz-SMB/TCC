@@ -291,6 +291,14 @@ begin
     C(5) <= G3(5) or (C(4) and P3(5));
     C(6) <= G3(6) or (C(5) and P3(6));
     C(7) <= G3(7) or (C(6) and P3(7));
+    C(8) <= G3(8) or (C(7) and P3(8));
+    C(9) <= G3(9) or (C(8) and P3(9));
+    C(10) <= G3(10) or (C(9) and P3(10));
+    C(11) <= G3(11) or (C(10) and P3(11));
+    C(12) <= G3(12) or (C(11) and P3(12));
+    C(13) <= G3(13) or (C(12) and P3(13));
+    C(14) <= G3(14) or (C(13) and P3(14));
+    C(15) <= G3(15) or (C(14) and P3(15));
 
     S(0) <= P0(0) xor C_IN;
     S(1) <= P0(1) xor C(0);
@@ -300,8 +308,16 @@ begin
     S(5) <= P0(5) xor C(4);
     S(6) <= P0(6) xor C(5);
     S(7) <= P0(7) xor C(6);
+    S(8) <= P0(8) xor C(7);
+    S(9) <= P0(9) xor C(8);
+    S(10) <= P0(10) xor C(9);
+    S(11) <= P0(11) xor C(10);
+    S(12) <= P0(12) xor C(11);
+    S(13) <= P0(13) xor C(12);
+    S(14) <= P0(14) xor C(13);
+    S(15) <= P0(15) xor C(14);
 
     SOMA_OUT <= S; 
-    C_OUT <= C(7);
+    C_OUT <= C(15);
 
 end behav;
