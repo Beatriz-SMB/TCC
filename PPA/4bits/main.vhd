@@ -88,50 +88,6 @@ architecture behav of main is
     begin
 
     -- Kogge Stone --------------------
-    flipflopDA : genericFlipflopD generic map(4) port map (
-        d => A,
-        clk => clk,
-        reset => reset,
-        q => s_A
-	);
-
-    flipflopDB : genericFlipflopD generic map(4) port map (
-        d => B,
-        clk => clk,
-        reset => reset,
-        q => s_B
-	);
-	 
-	flipflopDcin : flipflopD port map (
-        D => Cin,
-        CLK => clk,
-        RESET => reset,
-        Q => s_cin
-	);
-
-    flipflopDcout : flipflopD port map (
-        D => s_cout,
-        CLK => clk,
-        RESET => reset,
-        Q => Cout
-	);
-
-    flipflopDsum : genericFlipflopD generic map(4) port map (
-        d => s_sum,
-        clk => clk,
-        reset => reset,
-        q => sum
-	);
-
-    KS: KoggeStone port map (
-        A_IN => s_A,
-        B_IN => s_B,
-        C_IN => s_cin,
-        C_OUT => s_cout,
-        SOMA_OUT => s_sum
-    );
-
-    -- Brent Kung --------------------
     -- flipflopDA : genericFlipflopD generic map(4) port map (
     --     d => A,
     --     clk => clk,
@@ -167,13 +123,57 @@ architecture behav of main is
     --     q => sum
 	-- );
 
-    -- BK: BrentKung port map (
+    -- KS: KoggeStone port map (
     --     A_IN => s_A,
     --     B_IN => s_B,
     --     C_IN => s_cin,
     --     C_OUT => s_cout,
     --     SOMA_OUT => s_sum
     -- );
+
+    -- Brent Kung --------------------
+    flipflopDA : genericFlipflopD generic map(4) port map (
+        d => A,
+        clk => clk,
+        reset => reset,
+        q => s_A
+	);
+
+    flipflopDB : genericFlipflopD generic map(4) port map (
+        d => B,
+        clk => clk,
+        reset => reset,
+        q => s_B
+	);
+	 
+	flipflopDcin : flipflopD port map (
+        D => Cin,
+        CLK => clk,
+        RESET => reset,
+        Q => s_cin
+	);
+
+    flipflopDcout : flipflopD port map (
+        D => s_cout,
+        CLK => clk,
+        RESET => reset,
+        Q => Cout
+	);
+
+    flipflopDsum : genericFlipflopD generic map(4) port map (
+        d => s_sum,
+        clk => clk,
+        reset => reset,
+        q => sum
+	);
+
+    BK: BrentKung port map (
+        A_IN => s_A,
+        B_IN => s_B,
+        C_IN => s_cin,
+        C_OUT => s_cout,
+        SOMA_OUT => s_sum
+    );
 
     -- Sklansky --------------------
     -- flipflopDA : genericFlipflopD generic map(4) port map (
