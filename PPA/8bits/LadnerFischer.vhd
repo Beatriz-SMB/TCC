@@ -100,7 +100,6 @@ begin
     P70 <= P74 and P30;
     G70 <= (P74 and G30) or G74;
 
-
     -- post processing:
     C(0) <= G(0) or (C_IN and P(0));
     C(1) <= G10 or (C(0) and P10);
