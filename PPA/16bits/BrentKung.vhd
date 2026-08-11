@@ -4,7 +4,7 @@ use IEEE.STD_LOGIC_1164.ALL;
 use IEEE.NUMERIC_STD.ALL;
 
 -- entity
-entity BrentKung_8bit is
+entity BrentKung is
     Port ( 
         A_IN : in std_logic_vector(15 downto 0);
         B_IN : in std_logic_vector(15 downto 0);
@@ -12,10 +12,10 @@ entity BrentKung_8bit is
         SOMA_OUT : out std_logic_vector(15 downto 0);
         C_OUT : out std_logic
     );
-end BrentKung_8bit;
+end BrentKung;
 
 -- architecture
-architecture behav of BrentKung_8bit is
+architecture behav of BrentKung is
 
     -- stage 0: sinal por bit para G and P
     signal G, P : std_logic_vector(15 downto 0);
