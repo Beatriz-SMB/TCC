@@ -79,13 +79,13 @@ architecture behav of top is
     -- );
 
     -- CLA --------------------
-    CarryLookAhead: clA port map (
-        A_IN => A,
-        B_IN => B,
-        C_IN => Cin,
-        C_OUT => Cout,
-        SOMA_OUT => sum
-    );
+    -- CarryLookAhead: clA port map (
+    --     A_IN => A,
+    --     B_IN => B,
+    --     C_IN => Cin,
+    --     C_OUT => Cout,
+    --     SOMA_OUT => sum
+    -- );
 
     -- CarrySkip --------------------
     -- CS: carrySkip port map (
@@ -97,13 +97,13 @@ architecture behav of top is
     -- );
 
     -- CarrySelect --------------------
-    -- CS: carrySelect port map (
-    --     A_IN => A,
-    --     B_IN => B,
-    --     C_IN => Cin,
-    --     C_OUT => Cout,
-    --     SOMA_OUT => sum
-    -- );
+    CS: carrySelect port map (
+        A_IN => A,
+        B_IN => B,
+        C_IN => Cin,
+        C_OUT => Cout,
+        SOMA_OUT => sum
+    );
 
     -- Conditional --------------------
     -- C: conditional port map (
