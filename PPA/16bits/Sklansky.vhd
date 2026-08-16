@@ -159,8 +159,8 @@ begin
     P1308 <= P1312 and P1108;
     G1308 <= (P1312 and G1108) or G1312;
 
-    P1408 <= P(14) and P1108;
-    G1408 <= (P(14) and G1108) or G(14);
+    P1408 <= P1412 and P1108;
+    G1408 <= (P1412 and G1108) or G1412;
 
     P1508 <= P1512 and P1108;
     G1508 <= (P1512 and G1108) or G1512;
@@ -190,26 +190,26 @@ begin
     P80 <= P(8) and P70;
     G80 <= (P(8) and G70) or G(8);
 
-    P90 <= P(9) and P70;
-    G90 <= (P(9) and G70) or G98;
+    P90 <= P98 and P70;
+    G90 <= (P98 and G70) or G98;
 
-    P100 <= P(10) and P70;
-    G100 <= (P(10) and G70) or G1008;
+    P100 <= P1008 and P70;
+    G100 <= (P1008 and G70) or G1008;
 
-    P110 <= P(11) and P70;
-    G110 <= (P(11) and G70) or G1108;
+    P110 <= P1108 and P70;
+    G110 <= (P1108 and G70) or G1108;
 
-    P120 <= P(12) and P70;
-    G120 <= (P(12) and G70) or G1208;
+    P120 <= P1208 and P70;
+    G120 <= (P1208 and G70) or G1208;
 
-    P130 <= P(13) and P70; 
-    G130 <= (P(13) and G70) or G1308;
+    P130 <= P1308 and P70; 
+    G130 <= (P1308 and G70) or G1308;
 
-    P140 <= P(14) and P70;
-    G140 <= (P(14) and G70) or G1408;
+    P140 <= P1408 and P70;
+    G140 <= (P1408 and G70) or G1408;
 
-    P150 <= P(15) and P70;
-    G150 <= (P(15) and G70) or G1508;
+    P150 <= P1508 and P70;
+    G150 <= (P1508 and G70) or G1508;
 
     -- post processing:
     C(0) <= G(0) or (C_IN and P(0));
