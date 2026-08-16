@@ -164,26 +164,26 @@ begin
     P80 <= P(8) and P70;
     G80 <= (P(8) and G70) or G(8);
 
-    P90 <= P(9) and P70;
-    G90 <= (P(9) and G70) or G98;
+    P90 <= P98 and P70;
+    G90 <= (P98 and G70) or G98;
 
     P100 <= P(10) and P90;
     G100 <= (P(10) and G90) or G(10);
 
-    P110 <= P(11) and P70;
-    G110 <= (P(11) and G70) or G1108;
+    P110 <= P1108 and P70;
+    G110 <= (P1108 and G70) or G1108;
 
     P120 <= P(12) and P110; 
     G120 <= (P(12) and G110) or G(12);
 
-    P130 <= P(13) and P110;
-    G130 <= (P(13) and G110) or G1312;
+    P130 <= P1312 and P110;
+    G130 <= (P1312 and G110) or G1312;
 
     P140 <= P(14) and P130;
     G140 <= (P(14) and G130) or G(14);
 
-    P150 <= P(15) and P70;
-    G150 <= (P(15) and G70) or G1508;
+    P150 <= P1508 and P70;
+    G150 <= (P1508 and G70) or G1508;
     
     -- post processing:
     C(0) <= G(0) or (C_IN and P(0));
