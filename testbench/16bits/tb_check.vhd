@@ -14,7 +14,7 @@ architecture sim of tb_check is
     signal cout : std_logic;
 
     file gold_file : text open read_mode is "16 bits/resultado.txt";
-    file log_file : text open write_mode is "16 bits/KoggeStone.txt";
+    file log_file : text open write_mode is "16 bits/CarrySelect.txt";
 
 begin
 
@@ -120,13 +120,13 @@ begin
    		write(L_Log, string'("Projeto PASSOU no teste"));
         writeline(log_file, L_Log);
 
-        report "RESULTADO FINAL: PROJETO DO ALUNO PASSOU NO TESTE"
+        report "RESULTADO FINAL: PROJETO DESENVOLVIDO PASSOU NO TESTE"
         	severity failure;
 
 	else
     	write(L_Log, string'("Projeto FALHOU no teste"));
         writeline(log_file, L_Log);
-        report "RESULTADO FINAL: PROJETO DO ALUNO FALHOU NO TESTE"
+        report "RESULTADO FINAL: PROJETO DESENVOLVIDO FALHOU NO TESTE"
         severity failure;
 
 	end if;
