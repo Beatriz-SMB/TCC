@@ -283,22 +283,22 @@ begin
     G4(15) <= (P3(15) and G3(7)) or G3(15);
 
     -- post processing:
-    C(0) <= G3(0) or (C_IN and P3(0));
-    C(1) <= G3(1) or (C(0) and P3(1));
-    C(2) <= G3(2) or (C(1) and P3(2));
-    C(3) <= G3(3) or (C(2) and P3(3));
-    C(4) <= G3(4) or (C(3) and P3(4));
-    C(5) <= G3(5) or (C(4) and P3(5));
-    C(6) <= G3(6) or (C(5) and P3(6));
-    C(7) <= G3(7) or (C(6) and P3(7));
-    C(8) <= G3(8) or (C(7) and P3(8));
-    C(9) <= G3(9) or (C(8) and P3(9));
-    C(10) <= G3(10) or (C(9) and P3(10));
-    C(11) <= G3(11) or (C(10) and P3(11));
-    C(12) <= G3(12) or (C(11) and P3(12));
-    C(13) <= G3(13) or (C(12) and P3(13));
-    C(14) <= G3(14) or (C(13) and P3(14));
-    C(15) <= G3(15) or (C(14) and P3(15));
+    C(0) <= G4(0) or (C_IN and P4(0));
+    C(1) <= G4(1) or (C(0) and P4(1));
+    C(2) <= G4(2) or (C(1) and P4(2));
+    C(3) <= G4(3) or (C(2) and P4(3));
+    C(4) <= G4(4) or (C(3) and P4(4));
+    C(5) <= G4(5) or (C(4) and P4(5));
+    C(6) <= G4(6) or (C(5) and P4(6));
+    C(7) <= G4(7) or (C(6) and P4(7));
+    C(8) <= G4(8) or (C(7) and P4(8));
+    C(9) <= G4(9) or (C(8) and P4(9));
+    C(10) <= G4(10) or (C(9) and P4(10));
+    C(11) <= G4(11) or (C(10) and P4(11));
+    C(12) <= G4(12) or (C(11) and P4(12));
+    C(13) <= G4(13) or (C(12) and P4(13));
+    C(14) <= G4(14) or (C(13) and P4(14));
+    C(15) <= G4(15) or (C(14) and P4(15));
 
     S(0) <= P0(0) xor C_IN;
     S(1) <= P0(1) xor C(0);
