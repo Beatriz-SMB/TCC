@@ -14,7 +14,7 @@ architecture sim of tb_check is
     signal cout : std_logic;
 
     file gold_file : text open read_mode is "16 bits/resultado.txt";
-    file log_file : text open write_mode is "16 bits/CarrySelect.txt";
+    file log_file : text open write_mode is "16 bits/BrentKung.txt";
 
 begin
 
